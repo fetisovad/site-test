@@ -9,6 +9,7 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: flex-start;
   padding: 10px 20px;
+  margin-bottom: 30px;
 `
 
 const Logo = styled.a`

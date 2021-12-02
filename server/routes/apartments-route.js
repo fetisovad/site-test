@@ -13,4 +13,16 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    try {
+        const {id} = req.query
+        console.log(id)
+        const apartment = await Apartment.findOne({where: {id}})
+
+        res.json(apartment)
+    } catch (e) {
+        console.log(e)
+    }
+})
+
 module.exports = router

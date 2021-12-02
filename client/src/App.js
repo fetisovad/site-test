@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import Apartment from "./pages/Apartment";
 import {useState} from "react";
 import axios from "axios";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
     const [apartmentItem, setApartmentItem] = useState('')
@@ -25,6 +26,7 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
+                <NavBar/>
                 <Routes>
                     <Route path={`/apartments/${apartmentItem.id}`} element={<Apartment apartmentItem={apartmentItem}/>}/>
                     <Route path='/' element={<MainPage setApartmentItem={setApartmentItem} handleAllInfo={handleAllInfo}/>}/>

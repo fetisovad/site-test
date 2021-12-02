@@ -1,5 +1,4 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import NavBar from "../components/NavBar/NavBar";
 import styled from 'styled-components'
 import Buttons from "../components/Buttons/Buttons";
 import axios from "axios";
@@ -29,7 +28,6 @@ const MainPage = ({handleAllInfo}) => {
 
     return (
         <>
-            <NavBar/>
             <Container>
                 <Buttons/>
                 <ListGroup apartments={apartments} handleAllInfo={handleAllInfo}/>

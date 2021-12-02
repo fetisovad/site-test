@@ -4,12 +4,13 @@ import styled from 'styled-components'
 const Nav = styled.nav`
   width: 100%;
   height: 100px;
-  background: aqua;
+  background: #0A223D;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 10px 20px;
   margin-bottom: 30px;
+  color: #FFFFFF;
 `
 
 const Logo = styled.a`

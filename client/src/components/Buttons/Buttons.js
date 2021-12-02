@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const ButtonsGroup = styled.div`
   width: 100%;
-  background: lightgoldenrodyellow;
   max-width: 600px;
   margin: 0 auto;
   display: flex;
@@ -11,8 +10,9 @@ const ButtonsGroup = styled.div`
 `
 
 const ButtonReset = styled.button`
+  color: #FFFFFF;
   cursor: pointer;
-  background: lightcoral;
+  background: #EC1F46;
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;

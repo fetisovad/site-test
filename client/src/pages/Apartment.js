@@ -1,11 +1,12 @@
 import React from 'react';
+import Apartment from "../components/Apartment/Apartment";
 
-const Apartment = () => {
+const ApartmentPage = ({apartmentItem}) => {
     return (
         <div>
-            <h1>Apartment Page</h1>
+            <Apartment apartmentItem={apartmentItem}/>
         </div>
     );
 };
 
-export default Apartment;
+export default ApartmentPage;

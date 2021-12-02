@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import NavBar from "../components/NavBar/NavBar";
 import styled from 'styled-components'
 import Buttons from "../components/Buttons/Buttons";
@@ -11,7 +11,7 @@ const Container = styled.div`
   padding: 0 15px;
 `
 
-const MainPage = () => {
+const MainPage = ({handleAllInfo}) => {
     const [apartments, setApartments] = useState([])
 
     const getApartments = useCallback(async () => {
@@ -23,8 +23,6 @@ const MainPage = () => {
             .catch(e => console.log(e))
     }, [apartments, setApartments])
 
-    console.log(apartments)
-
     useEffect(() => {
         getApartments()
     }, [setApartments])
@@ -34,7 +32,7 @@ const MainPage = () => {
             <NavBar/>
             <Container>
                 <Buttons/>
-                <ListGroup apartments={apartments} />
+                <ListGroup apartments={apartments} handleAllInfo={handleAllInfo}/>
             </Container>
         </>
     );

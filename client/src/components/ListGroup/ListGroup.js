@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import Modal from "../Modal/Modal";
 import {Link} from "react-router-dom";
-import Apartment from "../Apartment/Apartment";
 
 const Table = styled.table`
   margin-top: 30px;
@@ -11,7 +10,7 @@ const Table = styled.table`
 `
 
 const TrHead = styled.tr`
-  background: red;
+  background: lightcoral;
 `
 
 const ThHead = styled.th`
@@ -19,7 +18,7 @@ const ThHead = styled.th`
 `
 
 const TrBody = styled.tr`
-  background: #61dafb;
+  background: lightcyan;
   border: 1px solid grey;
 `
 
@@ -44,10 +43,15 @@ const Overlay = styled.div`
 `
 
 const InfoButton = styled.button`
-  
+  padding: 10px;
+  background: #0A223D;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: white;
 `
 
-const ListGroup = ({apartments, handleAllInfo}) => {
+const ListGroup = ({filteredApartments}) => {
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [activeModalItem, setActiveModalItem] = useState(false)
 
@@ -68,34 +72,28 @@ const ListGroup = ({apartments, handleAllInfo}) => {
             <Table>
                 <thead>
                 <TrHead>
-                    <ThHead>Image</ThHead>
-                    <ThHead>Number</ThHead>
-                    {/*<ThHead>Position on floor</ThHead>*/}
-                    <ThHead>Price</ThHead>
-                    <ThHead>Rooms</ThHead>
-                    <ThHead>Total area</ThHead>
-                    {/*<ThHead>kitchen area</ThHead>*/}
-                    {/*<ThHead>Live area</ThHead>*/}
-                    <ThHead>All info</ThHead>
+                    <ThHead>Планировка</ThHead>
+                    <ThHead>Номер</ThHead>
+                    <ThHead>Цена</ThHead>
+                    <ThHead>Количество комнат</ThHead>
+                    <ThHead>Общая площадь</ThHead>
+                    <ThHead>Полная информация</ThHead>
                 </TrHead>
                 </thead>
                 <tbody>
-                {apartments.map((apartment) => (
+                {filteredApartments.map((apartment) => (
                     <TrBody key={apartment.id}>
                         <TdBody>
                             <Img onClick={() => handleOpenModal(apartment.id)} src={`${apartment.layout_image}`} alt={`${apartment.id}`}/>
                         </TdBody>
                         <TdBody>{apartment.id}</TdBody>
-                        {/*<TdBody>{apartment.pos_on_floor}</TdBody>*/}
                         <TdBody>{apartment.price}</TdBody>
                         <TdBody>{apartment.rooms}</TdBody>
                         <TdBody>{apartment.area_total}</TdBody>
-                        {/*<TdBody>{apartment.area_kitchen}</TdBody>*/}
-                        {/*<TdBody>{apartment.area_live}</TdBody>*/}
                         <TdBody>
                             <Link to={`apartments/${apartment.id}`}>
-                                <InfoButton onClick={() => handleAllInfo(apartment.id)}>
-                                    click
+                                <InfoButton>
+                                    Подробнее
                                 </InfoButton>
                             </Link>
                         </TdBody>

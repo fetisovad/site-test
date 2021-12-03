@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import {Link} from "react-router-dom";
 
 const Nav = styled.nav`
   width: 100%;
@@ -15,12 +16,15 @@ const Nav = styled.nav`
 
 const Logo = styled.a`
   font-size: 36px;
+  color: white;
 `
 
 const NavBar = () => {
     return (
         <Nav>
-            <Logo>Etagi</Logo>
+            <Link to='/' style={{textDecoration: 'none'}}>
+                <Logo>Etagi</Logo>
+            </Link>
         </Nav>
     );
 };

@@ -25,6 +25,7 @@ const CloseButton = styled.button`
   border-radius: 4px;
   border: none;
   cursor: pointer;
+  color: white;
 `
 
 const Img = styled.img`
@@ -34,7 +35,7 @@ const Img = styled.img`
 const Modal = ({activeModalItem, setIsOpenModal}) => {
     const [ImgSrc, setImgSrc] = useState('')
 
-    useEffect(async () => {
+    const getLayout = async () => {
         await axios.get(`/api/apartments/${activeModalItem}`, {
             headers: {
                 'Content-Type': 'application/json'
@@ -43,7 +44,11 @@ const Modal = ({activeModalItem, setIsOpenModal}) => {
         })
             .then(res => setImgSrc(res.data.layout_image))
             .catch(e => console.log(e))
-    }, [activeModalItem])
+    }
+
+    useEffect(() =>{
+        getLayout()
+    }, [setImgSrc])
 
     return (
         <ModalWrapper>

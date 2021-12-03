@@ -21,13 +21,13 @@ const ButtonReset = styled.button`
   }
 `
 
-const Buttons = () => {
+const Buttons = ({filterPrice, filterArea, resetFilter}) => {
     return (
         <ButtonsGroup>
             <ButtonReset>Фильтр</ButtonReset>
-            <ButtonReset>По цене</ButtonReset>
-            <ButtonReset>По площади</ButtonReset>
-            <ButtonReset>Сброс</ButtonReset>
+            <ButtonReset onClick={filterPrice}>По цене</ButtonReset>
+            <ButtonReset onClick={filterArea}>По площади</ButtonReset>
+            <ButtonReset onClick={resetFilter}>Сброс</ButtonReset>
         </ButtonsGroup>
     );
 };

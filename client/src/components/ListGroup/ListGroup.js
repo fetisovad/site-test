@@ -54,11 +54,16 @@ const InfoButton = styled.button`
 const ListGroup = ({filteredApartments}) => {
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [activeModalItem, setActiveModalItem] = useState(false)
+    const [paginateApart, setPaginateApart] = useState(filteredApartments)
 
 
     const handleOpenModal = (id) => {
         setIsOpenModal(!isOpenModal)
         setActiveModalItem(id)
+    }
+
+    const paginate = () => {
+
     }
 
     return (
@@ -101,6 +106,8 @@ const ListGroup = ({filteredApartments}) => {
                 ))}
                 </tbody>
             </Table>
+            <button>-</button>
+            <button>+</button>
         </>
     );
 };

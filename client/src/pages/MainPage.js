@@ -30,16 +30,13 @@ const MainPage = () => {
     useEffect(() => {
         getApartments()
     }, [setApartments])
-    console.log(filteredApartments)
 
     const filterPrice = () => {
-        console.log("filterPrice")
         setFilteredApartments(_.sortBy(apartments, 'price'))
     }
 
     const filterArea = () => {
-        setFilteredApartments(_.sortBy(apartments, 'total_area'))
-
+        setFilteredApartments(_.sortBy(apartments, 'area_total'))
     }
 
     const resetFilter = () => {

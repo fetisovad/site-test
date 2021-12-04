@@ -24,7 +24,7 @@ const ButtonReset = styled.button`
 const Buttons = ({filterPrice, filterArea, resetFilter}) => {
     return (
         <ButtonsGroup>
-            <ButtonReset>Фильтр</ButtonReset>
+            {/*<ButtonReset>Фильтр</ButtonReset>*/}
             <ButtonReset onClick={filterPrice}>По цене</ButtonReset>
             <ButtonReset onClick={filterArea}>По площади</ButtonReset>
             <ButtonReset onClick={resetFilter}>Сброс</ButtonReset>

@@ -14,7 +14,7 @@ const Nav = styled.nav`
   color: #FFFFFF;
 `
 
-const Logo = styled.a`
+const Logo = styled.span`
   font-size: 36px;
   color: white;
 `

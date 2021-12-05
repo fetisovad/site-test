@@ -14,6 +14,9 @@ const Container = styled.div`
 const MainPage = () => {
     const [apartments, setApartments] = useState([])
     const [filteredApartments, setFilteredApartments] = useState(apartments)
+    const [activePriceFilter, setActivePriceFilter] = useState(false)
+    const [activeAreaFilter, setActiveAreaFilter] = useState(false)
+    const [activeRoomFilter, setActiveRoomFilter] = useState(false)
 
     const getApartments = useCallback(async () => {
         await axios.get('/api/apartments/', {
@@ -31,20 +34,31 @@ const MainPage = () => {
         getApartments()
     }, [setApartments])
 
-    const filterPriceUp = () => {
-        setFilteredApartments(_.sortBy(apartments, 'price'))
+    const filterPrice = () => {
+        setActivePriceFilter(!activePriceFilter)
+        if(activePriceFilter) {
+            setFilteredApartments(_.sortBy(apartments, 'price'))
+        } else {
+            setFilteredApartments(_.sortBy(apartments, 'price').reverse())
+        }
     }
 
-    const filterPriceDown = () => {
-        setFilteredApartments(_.sortBy(apartments, 'price').reverse())
+    const filterArea = () => {
+        setActiveAreaFilter(!activeAreaFilter)
+        if(activeAreaFilter) {
+            setFilteredApartments(_.sortBy(apartments, 'area_total'))
+        } else {
+            setFilteredApartments(_.sortBy(apartments, 'area_total').reverse())
+        }
     }
 
-    const filterAreaUp = () => {
-        setFilteredApartments(_.sortBy(apartments, 'area_total'))
-    }
-
-    const filterAreaDown = () => {
-        setFilteredApartments(_.sortBy(apartments, 'area_total').reverse())
+    const filterRooms = () => {
+        setActiveRoomFilter(!activeRoomFilter)
+        if(activeRoomFilter) {
+            setFilteredApartments(_.sortBy(apartments, 'rooms'))
+        } else {
+            setFilteredApartments(_.sortBy(apartments, 'rooms').reverse())
+        }
     }
 
     const resetFilter = () => {
@@ -54,11 +68,10 @@ const MainPage = () => {
     return (
         <>
             <Container>
-                <Buttons filterPriceUp={filterPriceUp}
-                         filterPriceDown={filterPriceDown}
-                         filterAreaUp={filterAreaUp}
-                         filterAreaDown={filterAreaDown}
+                <Buttons filterArea={filterArea}
+                         filterPrice={filterPrice}
                          resetFilter={resetFilter}
+                         filterRooms={filterRooms}
                 />
                 <ListGroup filteredApartments={filteredApartments}/>
             </Container>

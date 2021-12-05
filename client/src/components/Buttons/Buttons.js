@@ -27,18 +27,13 @@ const ArrowButton = styled.a`
   font-size: 16px;
 `
 
-const Buttons = ({filterPriceUp, filterPriceDown, filterAreaUp, filterAreaDown, resetFilter}) => {
+const Buttons = ({filterArea, filterPrice, filterRooms, resetFilter}) => {
     return (
        <>
            <ButtonsGroup>
-               <Button>По цене
-                   <ArrowButton onClick={filterPriceUp} href="#">&#8593;</ArrowButton>
-                   <ArrowButton onClick={filterPriceDown} href="#">&#8595;</ArrowButton>
-               </Button>
-               <Button>По площади
-                   <ArrowButton onClick={filterAreaUp} href="#">&#8593;</ArrowButton>
-                   <ArrowButton onClick={filterAreaDown} href="#">&#8595;</ArrowButton>
-               </Button>
+               <Button onClick={filterPrice}>По цене</Button>
+               <Button onClick={filterArea}>По площади</Button>
+               <Button onClick={filterRooms}>По комнатам</Button>
                <Button onClick={resetFilter}>Сброс</Button>
            </ButtonsGroup>
        </>

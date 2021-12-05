@@ -9,7 +9,7 @@ const ButtonsGroup = styled.div`
   justify-content: space-around;
 `
 
-const ButtonReset = styled.button`
+const Button = styled.button`
   color: #FFFFFF;
   cursor: pointer;
   background: #EC1F46;
@@ -21,14 +21,27 @@ const ButtonReset = styled.button`
   }
 `
 
-const Buttons = ({filterPrice, filterArea, resetFilter}) => {
+const ArrowButton = styled.a`
+  text-decoration: none;
+  margin: 0 5px;
+  font-size: 16px;
+`
+
+const Buttons = ({filterPriceUp, filterPriceDown, filterAreaUp, filterAreaDown, resetFilter}) => {
     return (
-        <ButtonsGroup>
-            {/*<ButtonReset>Фильтр</ButtonReset>*/}
-            <ButtonReset onClick={filterPrice}>По цене</ButtonReset>
-            <ButtonReset onClick={filterArea}>По площади</ButtonReset>
-            <ButtonReset onClick={resetFilter}>Сброс</ButtonReset>
-        </ButtonsGroup>
+       <>
+           <ButtonsGroup>
+               <Button>По цене
+                   <ArrowButton onClick={filterPriceUp} href="#">&#8593;</ArrowButton>
+                   <ArrowButton onClick={filterPriceDown} href="#">&#8595;</ArrowButton>
+               </Button>
+               <Button>По площади
+                   <ArrowButton onClick={filterAreaUp} href="#">&#8593;</ArrowButton>
+                   <ArrowButton onClick={filterAreaDown} href="#">&#8595;</ArrowButton>
+               </Button>
+               <Button onClick={resetFilter}>Сброс</Button>
+           </ButtonsGroup>
+       </>
     );
 };
 

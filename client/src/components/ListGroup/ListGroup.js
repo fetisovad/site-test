@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import styled from "styled-components";
 import Modal from "../Modal/Modal";
 import {Link} from "react-router-dom";
@@ -51,28 +51,62 @@ const InfoButton = styled.button`
   color: white;
 `
 
+const PaginateButtonsWrapper = styled.div`
+  display: flex;
+  margin: 10px auto;
+  align-items: center;
+  justify-content: center;
+`
+
+const PaginateButton = styled.a`
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid grey;
+  text-decoration: none;
+  color: black;
+  margin: 0 4px;
+  &.active {
+    background: blue;
+    color: white;
+  }
+`
+
 const ListGroup = ({filteredApartments}) => {
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [activeModalItem, setActiveModalItem] = useState(false)
-    const [paginateApart, setPaginateApart] = useState(filteredApartments)
-
+    const [activePage, setActivePage] = useState(0)
 
     const handleOpenModal = (id) => {
         setIsOpenModal(!isOpenModal)
         setActiveModalItem(id)
     }
 
-    const paginate = () => {
+    const visibleItems = 6
 
-    }
+    const {pageItems, pageStart, pageEnd} = useMemo(() => {
+        const pageLimit = Math.ceil(filteredApartments.length / visibleItems)
+        let pageItems = []
+        for (let i = 0; i < pageLimit; i++) {
+            pageItems.push(
+                <PaginateButton className={i === activePage ? 'active' : null} href='#' role='button' key={i} onClick={() => setActivePage(i)}>{i + 1}</PaginateButton>
+            )
+        }
+        const pageStart = activePage * visibleItems
+        const pageEnd = pageStart + visibleItems
+        return {
+            pageItems,
+            pageStart,
+            pageEnd
+        }
+    }, [activePage, filteredApartments.length])
 
     return (
         <>
             {isOpenModal && (
-               <>
-                   <Overlay/>
-                   <Modal activeModalItem={activeModalItem} setIsOpenModal={setIsOpenModal} />
-               </>
+                <>
+                    <Overlay/>
+                    <Modal activeModalItem={activeModalItem} setIsOpenModal={setIsOpenModal}/>
+                </>
             )}
             <Table>
                 <thead>
@@ -86,10 +120,11 @@ const ListGroup = ({filteredApartments}) => {
                 </TrHead>
                 </thead>
                 <tbody>
-                {filteredApartments.map((apartment) => (
+                {filteredApartments.slice(pageStart, pageEnd).map((apartment) => (
                     <TrBody key={apartment.id}>
                         <TdBody>
-                            <Img onClick={() => handleOpenModal(apartment.id)} src={`${apartment.layout_image}`} alt={`${apartment.id}`}/>
+                            <Img onClick={() => handleOpenModal(apartment.id)} src={`${apartment.layout_image}`}
+                                 alt={`${apartment.id}`}/>
                         </TdBody>
                         <TdBody>{apartment.id}</TdBody>
                         <TdBody>{apartment.price}</TdBody>
@@ -106,8 +141,9 @@ const ListGroup = ({filteredApartments}) => {
                 ))}
                 </tbody>
             </Table>
-            <button>-</button>
-            <button>+</button>
+            <PaginateButtonsWrapper>
+                {pageItems}
+            </PaginateButtonsWrapper>
         </>
     );
 };

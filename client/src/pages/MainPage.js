@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components'
 import Buttons from "../components/Buttons/Buttons";
 import axios from "axios";
@@ -15,7 +15,7 @@ const MainPage = () => {
     const [apartments, setApartments] = useState([])
     const [filteredApartments, setFilteredApartments] = useState(apartments)
 
-    const getApartments = async () => {
+    const getApartments = useCallback(async () => {
         await axios.get('/api/apartments/', {
             headers: {
                 'Content-Type': 'application/json'
@@ -25,18 +25,26 @@ const MainPage = () => {
             setFilteredApartments(res.data)
         })
             .catch(e => console.log(e))
-    }
+    }, [])
 
     useEffect(() => {
         getApartments()
     }, [setApartments])
 
-    const filterPrice = () => {
+    const filterPriceUp = () => {
         setFilteredApartments(_.sortBy(apartments, 'price'))
     }
 
-    const filterArea = () => {
+    const filterPriceDown = () => {
+        setFilteredApartments(_.sortBy(apartments, 'price').reverse())
+    }
+
+    const filterAreaUp = () => {
         setFilteredApartments(_.sortBy(apartments, 'area_total'))
+    }
+
+    const filterAreaDown = () => {
+        setFilteredApartments(_.sortBy(apartments, 'area_total').reverse())
     }
 
     const resetFilter = () => {
@@ -46,8 +54,10 @@ const MainPage = () => {
     return (
         <>
             <Container>
-                <Buttons filterPrice={filterPrice}
-                         filterArea={filterArea}
+                <Buttons filterPriceUp={filterPriceUp}
+                         filterPriceDown={filterPriceDown}
+                         filterAreaUp={filterAreaUp}
+                         filterAreaDown={filterAreaDown}
                          resetFilter={resetFilter}
                 />
                 <ListGroup filteredApartments={filteredApartments}/>

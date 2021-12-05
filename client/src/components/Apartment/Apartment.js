@@ -34,8 +34,6 @@ const GroupListItem = styled.li`
 `
 
 const Apartment = ({apartmentItem}) => {
-    console.log(apartmentItem)
-
     return (
         <ApartmentWrapper>
             <ImgWrapper>

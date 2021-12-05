@@ -8,23 +8,22 @@ const ApartmentPage = () => {
     const {id} = useParams()
     const [apartmentItem, setApartmentItem] = useState('')
 
-
-    const getApartments = async () => {
-        await axios.get(`/api/apartments/${id}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            params: {id}
-        })
-            .then(res => {
-                setApartmentItem(res.data)
-            })
-            .catch(e => console.log(e))
-    }
-
     useEffect(() => {
+        const getApartments = async () => {
+            await axios.get(`/api/apartments/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                params: {id}
+            })
+                .then(res => {
+                    setApartmentItem(res.data)
+                })
+                .catch(e => console.log(e))
+        }
+
         getApartments()
-    }, [setApartmentItem])
+    }, [id])
 
     return (
         <div>

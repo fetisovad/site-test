@@ -16,21 +16,19 @@ const Button = styled.button`
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  &:first-child {
+    background: #0A223D;
+  }
   &:hover {
     transform: scale(1.2);
   }
 `
 
-const ArrowButton = styled.a`
-  text-decoration: none;
-  margin: 0 5px;
-  font-size: 16px;
-`
-
-const Buttons = ({filterArea, filterPrice, filterRooms, resetFilter}) => {
+const Buttons = ({handleModalFilter, filterArea, filterPrice, filterRooms, resetFilter}) => {
     return (
        <>
            <ButtonsGroup>
+               <Button onClick={handleModalFilter}>Фильтр</Button>
                <Button onClick={filterPrice}>По цене</Button>
                <Button onClick={filterArea}>По площади</Button>
                <Button onClick={filterRooms}>По комнатам</Button>

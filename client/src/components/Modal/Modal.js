@@ -35,20 +35,21 @@ const Img = styled.img`
 const Modal = ({activeModalItem, setIsOpenModal}) => {
     const [ImgSrc, setImgSrc] = useState('')
 
-    const getLayout = async () => {
-        await axios.get(`/api/apartments/${activeModalItem}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            params: {id: activeModalItem}
-        })
-            .then(res => setImgSrc(res.data.layout_image))
-            .catch(e => console.log(e))
-    }
+
 
     useEffect(() =>{
+        const getLayout = async () => {
+            await axios.get(`/api/apartments/${activeModalItem}`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                params: {id: activeModalItem}
+            })
+                .then(res => setImgSrc(res.data.layout_image))
+                .catch(e => console.log(e))
+        }
         getLayout()
-    }, [setImgSrc])
+    }, [activeModalItem])
 
     return (
         <ModalWrapper>

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import styled from "styled-components";
 import Modal from "../Modal/Modal";
 import {Link} from "react-router-dom";

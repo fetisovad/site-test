@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components'
+import {useParams, useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const ApartmentWrapper = styled.div`
   max-width: 1440px;
@@ -34,6 +36,27 @@ const GroupListItem = styled.li`
 `
 
 const Apartment = ({apartmentItem}) => {
+    const navigate = useNavigate()
+    const {id} = useParams()
+
+    useEffect(() => {
+        const checkApart = async () => {
+            await axios.get(`/api/apartments/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                params: {id}
+            })
+                .then(res => {
+                    if(res.data === null) {
+                        navigate('/')
+                    }
+                })
+                .catch(e => console.log(e))
+        }
+        checkApart()
+    }, [id, navigate])
+
     return (
         <ApartmentWrapper>
             <ImgWrapper>

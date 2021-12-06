@@ -12,7 +12,7 @@ const ModalWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,8 +36,7 @@ const Modal = ({activeModalItem, setIsOpenModal}) => {
     const [ImgSrc, setImgSrc] = useState('')
 
 
-
-    useEffect(() =>{
+    useEffect(() => {
         const getLayout = async () => {
             await axios.get(`/api/apartments/${activeModalItem}`, {
                 headers: {
